@@ -1,0 +1,102 @@
+{% extends 'accueil.html.twig' %}
+
+{% block title %}
+  Gestion des produits
+{% endblock %}
+
+{% block body %}
+  <div class="container row">
+    <div class="card col-md-6">
+      <div class="card-header h3 bg-info text-white text-uppercase text-center">
+        liste des produit
+      </div>
+      <div class="card-body">
+        <table class="table table-striped border">
+          <tr>
+            <th>
+              #
+            </th>
+            <th>
+              Libelle
+            </th>
+            <th>
+              Qstock
+            </th>
+          </tr>
+          <tr>
+            {% for u in listProduit %}
+              <tr>
+                <td>
+                  {{ u.id }}
+                </td>
+                <td>
+                  {{ u.libelle }}
+                </td>
+                <td>
+                  {{ u.qtStock }}
+                </td>
+              </tr>
+            {% endfor %}
+          </tr>
+        </table>
+      </div>
+
+      <div class="card-footer bg-info"></div>
+    </div>
+
+    <div class="card col-md-6">
+      <div class="card-header h3 bg-info text-white text-uppercase text-center">
+        formulaire d'ajout
+      </div>
+      <div class="card-body">
+        <form action="{{path('addproduit')}}" method="POST">
+                      <div class="row">
+<div class="form-group form-group col-md-6">
+                <label for="libelle">Libelle</label>
+                <input type="text"
+                  class="form-control"
+                  name="libelle"
+                  placeholder="libelle"
+                  required />
+              </div>
+<div class="form-group form-group col-md-6">
+                <label for="qtStock">Qantiter</label>
+                <input type="number"
+                  class="form-control"
+                  name="qtStock"
+                  placeholder="qtStock"
+                  required />
+              </div>
+
+              </div>
+
+              {# les boutons #}
+
+              <div class="row">
+              <div class="form-group form-group col-md-6">
+                <input type="hidden" value="#" name="user_id" />
+                <span>
+                  <input type="Submit"
+                    class="btn btn-success"
+                    name="ajouter"
+                    value="Ajouter" />
+                </span>
+                </div>
+                <div class="form-group form-group col-md-6">
+                <span>
+                  <input type="Reset"
+                    class="btn btn-danger"
+                    value="Annuler"
+                    name="Annuler" />
+                </span>
+              </div>
+
+              </div>
+        
+        </form>
+      </div>
+    </div>
+  </div>
+  {# templates/task/new.html.twig #}
+  {# {{ form(form) }} #}
+{% endblock %}

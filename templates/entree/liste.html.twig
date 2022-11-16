@@ -1,0 +1,115 @@
+{% extends 'accueil.html.twig' %}
+
+{% block title %}
+  Gestion des entree
+{% endblock %}
+
+{% block body %}
+  {# formulaire d'ajout d'une entree #}
+
+  <div class="container row">
+    <div class="card col-md-6">
+      <div class="card-header h3 bg-info text-white text-uppercase text-center">
+        liste des produit
+      </div>
+      <div class="card-body">
+        <table class="table table-striped border">
+          <tr>
+            <th>
+              #
+            </th>
+            <th>
+              Quantiter
+            </th>
+            <th>
+              date Entree
+            </th>
+          </tr>
+          <tr>
+            {% for u in listEntree %}
+              <tr>
+                <td>
+                  {{ u.id }}
+                </td>
+                <td>
+                  {{ u.qtE }}
+                </td>
+                <td>
+                  {{ u.dateE }}
+                </td>
+              </tr>
+            {% endfor %}
+          </tr>  
+        </table>
+      </div>
+
+      <div class="card-footer bg-info"></div>
+    </div>
+
+    <div class="card col-md-6">
+      <div class="card-header h3 bg-info text-white text-uppercase text-center">
+        formulaire d'ajout
+      </div>
+      <div class="card-body">
+        <form action="{{ path('addEntree') }}" method="POST">
+          <div class="row">
+          
+            <div class="form-group form-group col-md-6">
+              <label for="date">Date</label>
+              <input type="date"
+                class="form-control"
+                name="date"
+                placeholder="date"
+                required />
+            </div>
+            <div class="form-group form-group col-md-6">
+              <label for="qte">Qantiter</label>
+              <input type="number"
+                class="form-control"
+                name="qte"
+                placeholder="qte"
+                required />
+            </div>
+          </div>
+        <div class="row">
+          <div class="form-group form-group col-md-6">
+              <select class="form-select form-select form-control-user"
+                aria-label=".form-select-lg example"
+                name="product">
+                <option selected>
+                  Choisir un produit
+                </option>
+                {% for p in listProduit %}
+                  <option value="{{ p.id }}">
+                    {{ p.libelle }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+        </div>
+          {# les boutons #}
+
+          <div class="row">
+            <div class="form-group form-group col-md-6">
+              <input type="hidden" value="#" name="user_id" />
+              <span>
+                <input type="Submit"
+                  class="btn btn-success"
+                  name="ajouter"
+                  value="Ajouter" />
+              </span>
+            </div>
+            <div class="form-group form-group col-md-6">
+              <span>
+                <input type="Reset"
+                  class="btn btn-danger"
+                  value="Annuler"
+                  name="Annuler" />
+              </span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
